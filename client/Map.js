@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Animated, useWindowDimensions, View} from "react-native";
 import {Canvas, Circle, Group} from "@shopify/react-native-skia";
+import GestureHandler from "./GestureHandler";
 
 const Map = () => {
     const size = 700;
