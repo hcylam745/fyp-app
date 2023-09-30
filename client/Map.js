@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import {StyleSheet, View, Text, Alert, Skia} from "react-native";
-import {Canvas, Circle, Group, useImage, useValue, Image} from "@shopify/react-native-skia";
+import {Canvas, Circle, Group, useImage, useValue, Image, center} from "@shopify/react-native-skia";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import { useSharedValue, useAnimatedStyle, withSpring } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
 
-const img = require("./image.jpg")
+const img = require("./imagecropped.jpg")
 
 const styles = StyleSheet.create({
     ball: {
@@ -22,7 +22,10 @@ const styles = StyleSheet.create({
 });
 
 const Map = () => {
-  const offset = useSharedValue({ x: 0, y: 0});
+  const width = 760;
+  const height = 540;
+
+  const offset = useSharedValue({ x: -(width/2), y: -(height/2)});
   const rotation = useSharedValue(0);
   const savedRotation = useSharedValue(0);
   const scale = useSharedValue(1);
@@ -30,15 +33,17 @@ const Map = () => {
   const animatedStyles = useAnimatedStyle(() => {
     return {
       transform: [
-        { translateX: offset.value.x },
-        { translateY: offset.value.y },
-        { rotateZ: `${(rotation.value / Math.PI)*180}deg` },
+        { translateX: (width/2) + offset.value.x },
+        { translateY: (height/2) + offset.value.y },
+        { rotateZ: `${rotation.value}rad` },
+        { translateX: -(width/2) },
+        { translateY: -(height/2) },
         { scale: scale.value }
       ]
     };
   });
   
-  const start = useSharedValue({ x: 0, y: 0 });
+  const start = useSharedValue({ x: -(width/2), y:-(height/2) });
   const pan = Gesture.Pan()
   .onUpdate((e) => {
     offset.value = {
@@ -70,18 +75,17 @@ const Map = () => {
     savedScale.value = scale.value;
   })
 
-  const width = 960;
-  const height = 540;
+  
 
   const image = useImage(img);
 
   return (
-    <View style={{flex:1}}>
+    <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
       <GestureDetector gesture={Gesture.Race(pan, rotate, pinch)}>
           <Animated.View style={[styles.ball, animatedStyles]}>
             <Canvas style={{width, height}}>
               <Group>
-                <Image x={0} y={0} image={image} width={width} height={height} fit="cover"/>
+                <Image image={image} width={width} height={height} fit="cover"/>
               </Group>
             </Canvas>
           </Animated.View>
