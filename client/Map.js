@@ -25,7 +25,7 @@ const callAPI = () => {
       for (let i = 0; i < res.data.length; i++) {
         let x_val = out_arr[i][1];
         let y_val = out_arr[i][2];
-        let tmp = React.createElement(Chair, {x:x_val, y:y_val, key:i});
+        let tmp = React.createElement(Chair, {x:x_val, y:y_val, occupancy:out_arr[i][0], key:i});
         result.push(tmp);
       }
 

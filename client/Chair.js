@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {StyleSheet, View, Text, Alert, Skia} from "react-native";
 import {Circle, Paint, vec, Group} from "@shopify/react-native-skia";
 
-const Chair = ({x, y}) => {
+const Chair = ({x, y, occupancy}) => {
   const width = 96;
   const height = 96;
 
@@ -10,12 +10,19 @@ const Chair = ({x, y}) => {
   const c = vec(width/2, height/2);
   const r = (width-strokeWidth) / 2;
 
+  let center_colour = "green";
+  if (occupancy == "occupied") {
+    center_colour = "red";
+  } else if (occupancy == "bag") {
+    center_colour = "yellow";
+  }
+
   return (
     <Group transform={[{translateY: y},{translateX: x}]}>
       <Circle c={c} r={r} x={x} y={y}>
-        <Paint color="lightblue" />
+        <Paint color={center_colour} />
         <Paint color="black" style="stroke" strokeWidth={strokeWidth} />
-        <Paint color="green" style="stroke" strokeWidth={strokeWidth/2} />
+        <Paint color="lightblue" style="stroke" strokeWidth={strokeWidth/2} />
       </Circle>
     </Group>
   )
