@@ -12,6 +12,7 @@ CREATE TABLE `chairs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO fyp_db.chairs (status,x,y,`type`,`zone`,id,`date`) VALUES
-	 ('occupied',1,2,'blueChair',1,1,'2023-09-08 13:20:13'),
-	 ('free',2,2,'redChair',1,2,'2023-09-08 13:20:15'),
-	 ('bag',3,3,'greenChair',2,3,'2023-09-08 13:33:04');
+	 ('occupied',95,0,'blueChair',1,1,'2023-09-08 13:20:13'),
+	 ('free',285,0,'redChair',1,2,'2023-09-08 13:20:15'),
+	 ('bag',475,0,'greenChair',1,3,'2023-09-08 13:33:04'),
+	 ('free',664,0,'blueChair',1,4,'2023-10-02 17:31:04');
