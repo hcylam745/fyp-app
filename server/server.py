@@ -83,6 +83,7 @@ def add_chairs():
 
     return "Successfully added chairs to database."
 
+
 @app.route("/get_chairs", methods=["GET"])
 def get_chairs():
     cursor = conn.cursor()
