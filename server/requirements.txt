@@ -1,2 +1,2 @@
-flask >= 2.3.3
-flask_mysqldb >= 1.0.1
+flask
+psycopg2

@@ -1,4 +1,4 @@
-from db_config.configs import Config
+from configs import Config
 
 import psycopg2
 
