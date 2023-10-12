@@ -27,7 +27,6 @@ def add_chairs():
             # since we always delete the old entry, there will always be 1 row returned in this case.
             if(found_chairs[0][6] < datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S")):
                 cursor.execute("DELETE FROM fyp_db.chairs WHERE id = %s", [chair_id])
-                mysql.connection.commit()
             else:
                 print("Most recently added chair location is outdated. Skipping.")
                 continue
@@ -39,8 +38,7 @@ def add_chairs():
         zone = user_input[i]["zone"]
 
         # add new values to database.
-        cursor.execute("INSERT INTO fyp_db.chairs (status, x, y, type, zone, id, date) VALUES (%s, %s, %s, %s, %s, %s, %s)", [status, x, y, chair_type, zone, chair_id, date])
-    mysql.connection.commit()
+        cursor.execute("INSERT INTO fyp_db.chairs (status, x, y, type, zone, id, date) VALUES (%s, %s, %s, %s, %s, %s, TO_TIMESTAMP(%s,'YYYY-MM-DD HH24:MI:SS'))", [status, x, y, chair_type, zone, chair_id, date])
     cursor.close()
 
     return "Successfully added chairs to database."

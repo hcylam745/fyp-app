@@ -8,4 +8,6 @@ def get_connection():
                             user=Config.PostgreSQL_USER,
                             password=Config.PostgreSQL_PASSWORD)
 
+    conn.autocommit = True
+
     return conn
