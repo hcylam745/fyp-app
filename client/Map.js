@@ -13,7 +13,7 @@ const img = require("./table_cropped.png")
 
 const callAPI = () => {
   return new Promise((resolve, reject) =>{
-    axios.get("http://10.0.2.2:5000/get_chairs")
+    axios.get("https://fyp-app.onrender.com/get_chairs")
     .catch(function(error) {
       console.log(error.response);
 
