@@ -6,6 +6,8 @@ from routes import app
 
 from db_config import connect
 
+import datetime
+
 conn = connect.get_connection()
 
 @app.route("/add_chairs", methods=["POST"])
