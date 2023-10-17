@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from "react";
+import React, {useRef, useEffect, useState, useReducer} from "react";
 import {StyleSheet, View, Text, Alert, Skia} from "react-native";
 import {Canvas, Group, useImage, useValue, Image, center} from "@shopify/react-native-skia";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
@@ -117,6 +117,10 @@ const Map = () => {
     };
 
     fetchChairs();
+
+    const interval = setInterval(fetchChairs, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
