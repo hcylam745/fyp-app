@@ -19,5 +19,17 @@ def table_setup():
   id int NOT NULL unique,
   date timestamp NOT NULL
 );""")
+
+    cursor.execute("""CREATE TABLE IF NOT EXISTS fyp_db.tables (
+      x int NOT NULL,
+      y int NOT NULL,
+      type varchar(100) DEFAULT NULL,
+      zone int DEFAULT NULL,
+      id int NOT NULL unique,
+      date timestamp NOT NULL,
+      size_x int NOT NULL,
+      size_y int NOT NULL
+    )
+    """)
     cursor.close()
     return "Created table successfully."
