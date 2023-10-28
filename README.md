@@ -1,14 +1,14 @@
 # Setup Guide
 
-The server.py file requires a 'configs.py' file before it can work.<br/><br/>
+The server folder requires a 'configs.py' file before it can work. This file should be placed in the server folder, not any subfolders.<br/><br/>
 
 Format of config.py shown below:
 ```python
 class Config:
-    MYSQL_HOST = 'localhost'
-    MYSQL_USER = 'root'
-    MYSQL_PASSWORD = "password"
-    MYSQL_DB = "database_name"
+    PostgreSQL_HOST = 'localhost'
+    PostgreSQL_USER = 'root'
+    PostgreSQL_PASSWORD = "password"
+    PostgreSQL_DATABASE = "database_name"
 ```
 <br/>
 After creating the configs.py file, create a virtual environment and enter it (optional), then run:<br/><br/>
