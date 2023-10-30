@@ -124,17 +124,16 @@ const Map = () => {
   }, []);
 
   return (
-    <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
-      <GestureDetector gesture={Gesture.Race(pan, rotate, pinch)}>
+    <GestureDetector gesture={Gesture.Race(pan, rotate, pinch)}>
+      <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
           <Animated.View style={[styles.ball, animatedStyles]}>
             <Canvas style={{width, height}}>
               <Image image={image} width={width} height={height} fit="cover"/>
               {chairsList}
             </Canvas>
           </Animated.View>
-      </GestureDetector>
-    </View>
-      
+      </View>
+    </GestureDetector>
   )
 }
 export default Map
