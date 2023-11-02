@@ -65,9 +65,9 @@ const Map = () => {
         { translateX: (width/2) + offset.value.x },
         { translateY: (height/2) + offset.value.y },
         { rotateZ: `${rotation.value}rad` },
+        { scale: scale.value },
         { translateX: -(width/2) },
-        { translateY: -(height/2) },
-        { scale: scale.value }
+        { translateY: -(height/2) }
       ]
     };
   });
@@ -97,7 +97,6 @@ const Map = () => {
 
   const pinch = Gesture.Pinch()
   .onUpdate((e)=>{ 
-    console.log("pinched")
     scale.value = savedScale.value * e.scale;
   })
   .onEnd(()=>{
@@ -122,9 +121,8 @@ const Map = () => {
 
     return () => clearInterval(interval);
   }, []);
-
   return (
-    <GestureDetector gesture={Gesture.Race(pan, rotate, pinch)}>
+    <GestureDetector gesture={Gesture.Race(pinch, rotate, pan)}>
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
           <Animated.View style={[styles.ball, animatedStyles]}>
             <Canvas style={{width, height}}>
