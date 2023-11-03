@@ -13,6 +13,7 @@ conn = connect.get_connection()
 @app.route("/add_chairs", methods=["POST"])
 def add_chairs():
     # init variables
+    skipped = False
     cursor = conn.cursor()
     user_input = request.json
     logging.info("Trying to add {} to database.".format(user_input))
@@ -31,6 +32,7 @@ def add_chairs():
                 cursor.execute("DELETE FROM fyp_db.chairs WHERE id = %s", [chair_id])
             else:
                 print("Most recently added chair location is outdated. Skipping.")
+                skipped = True
                 continue
 
         x = user_input[i]["x"]
@@ -43,4 +45,9 @@ def add_chairs():
         cursor.execute("INSERT INTO fyp_db.chairs (status, x, y, type, zone, id, date) VALUES (%s, %s, %s, %s, %s, %s, TO_TIMESTAMP(%s,'YYYY-MM-DD HH24:MI:SS'))", [status, x, y, chair_type, zone, chair_id, date])
     cursor.close()
 
-    return "Successfully added chairs to database."
+    message = "Successfully added chairs to the database."
+
+    if skipped:
+        message += " Several added chairs were skipped because their timestamps were outdated."
+
+    return message

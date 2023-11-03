@@ -13,6 +13,7 @@ conn = connect.get_connection()
 @app.route("/add_tables", methods=["POST"])
 def add_tables():
     # init variables
+    skipped = False
     cursor = conn.cursor()
     user_input = request.json
     logging.info("Trying to add {} to database.".format(user_input))
@@ -31,6 +32,7 @@ def add_tables():
                 cursor.execute("DELETE FROM fyp_db.tables WHERE id = %s", [table_id])
             else:
                 print("Most recently added table information is outdated. Skipping.")
+                skipped = True
                 continue
 
         x = user_input[i]["x"]
@@ -44,4 +46,9 @@ def add_tables():
         cursor.execute("INSERT INTO fyp_db.tables (x, y, type, zone, id, date, size_x, size_y) VALUES (%s, %s, %s, %s, %s, TO_TIMESTAMP(%s,'YYYY-MM-DD HH24:MI:SS'), %s, %s)", [x, y, table_type, zone, table_id, date, size_x, size_y])
     cursor.close()
 
-    return "Successfully added chairs to database."
+    message = "Successfully added tables to the database."
+
+    if skipped:
+        message += " Several added tables were skipped because their timestamps were outdated."
+
+    return message
