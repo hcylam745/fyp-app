@@ -8,10 +8,11 @@ import Animated from "react-native-reanimated";
 import axios from "axios"
 
 import Chair from "./Chair";
+import Table from "./Table";
 
 const img = require("./table_cropped.png")
 
-const callAPI = () => {
+const getChairs = () => {
   return new Promise((resolve, reject) =>{
     axios.get("https://fyp-app.onrender.com/get_chairs")
     .catch(function(error) {
@@ -36,12 +37,38 @@ const callAPI = () => {
   })
 }
 
+const getTables = () => {
+  return new Promise((resolve, reject) =>{
+    axios.get("https://fyp-app.onrender.com/get_tables")
+    .catch(function(error) {
+      console.log(error.response);
+
+      reject(null);
+    })
+    .then((res)=>{
+      let out_arr = res.data;
+      let result = [];
+      for (let i = 0; i < res.data.length; i++) {
+        let x_val = out_arr[i][0];
+        let y_val = out_arr[i][1];
+        let type = out_arr[i][2];
+        let size_x = out_arr[i][6];
+        let size_y = out_arr[i][7];
+        let tmp = React.createElement(Table, {x:x_val, y:y_val, key:i, type:type, x_size: size_x, y_size: size_y});
+        result.push(tmp);
+      }
+
+      //console.log(result);
+
+      resolve(result);
+    })
+  })
+}
+
 const styles = StyleSheet.create({
-    ball: {
+    background: {
         width: 100,
-        height: 100,
-        borderRadius: 100,
-        backgroundColor: 'lightblue'
+        height: 100
     },
     map: {
       width:"100%",
@@ -109,24 +136,36 @@ const Map = () => {
 
   const [chairsList, setChairsList] = useState([]);
 
+  const [tablesList, setTablesList] = useState([]);
+
   useEffect(()=>{
+    const fetchAPI = async () => {
+      fetchChairs();
+      fetchTables();
+    }
+
     const fetchChairs = async () => {
-      let result = await callAPI();
-      setChairsList(result);
+      let chairs = await getChairs();
+      setChairsList(chairs);
     };
 
-    fetchChairs();
+    const fetchTables = async () => {
+      let tables = await getTables();
+      setTablesList(tables);
+    };
 
-    const interval = setInterval(fetchChairs, 1000);
+    fetchAPI();
+
+    const interval = setInterval(fetchAPI, 1000);
 
     return () => clearInterval(interval);
   }, []);
   return (
     <GestureDetector gesture={Gesture.Race(pinch, rotate, pan)}>
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
-          <Animated.View style={[styles.ball, animatedStyles]}>
+          <Animated.View style={[styles.background, animatedStyles]}>
             <Canvas style={{width, height}}>
-              <Image image={image} width={width} height={height} fit="cover"/>
+              {tablesList}
               {chairsList}
             </Canvas>
           </Animated.View>
