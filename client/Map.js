@@ -10,8 +10,6 @@ import axios from "axios"
 import Chair from "./Chair";
 import Table from "./Table";
 
-const img = require("./table_cropped.png")
-
 const getChairs = () => {
   return new Promise((resolve, reject) =>{
     axios.get("https://fyp-app.onrender.com/get_chairs")
@@ -130,10 +128,6 @@ const Map = () => {
     savedScale.value = scale.value;
   })
 
-  
-
-  const image = useImage(img);
-
   const [chairsList, setChairsList] = useState([]);
 
   const [tablesList, setTablesList] = useState([]);
@@ -161,7 +155,7 @@ const Map = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <GestureDetector gesture={Gesture.Race(pinch, rotate, pan)}>
+    <GestureDetector gesture={Gesture.Simultaneous(pinch, pan, rotate)}>
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
           <Animated.View style={[styles.background, animatedStyles]}>
             <Canvas style={{width, height}}>
