@@ -135,7 +135,6 @@ const Map = () => {
   useEffect(()=>{
     const fetchAPI = async () => {
       fetchChairs();
-      fetchTables();
     }
 
     const fetchChairs = async () => {
@@ -149,6 +148,7 @@ const Map = () => {
     };
 
     fetchAPI();
+    fetchTables();
 
     const interval = setInterval(fetchAPI, 1000);
 
