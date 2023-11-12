@@ -34,12 +34,31 @@ def add_chairs():
                 print("Most recently added chair location is outdated. Skipping.")
                 skipped = True
                 continue
+        
+        try:
+            x = user_input[i]["x"]
+        except:
+            return "'x' missing."
+        
+        try:
+            y = user_input[i]["y"]
+        except:
+            return "'y' missing."
+        
+        try:
+            status = user_input[i]["status"]
+        except:
+            return "'status' missing."
+        
+        try:
+            chair_type = user_input[i]["type"]
+        except:
+            return "'type' missing."
 
-        x = user_input[i]["x"]
-        y = user_input[i]["y"]
-        status = user_input[i]["status"]
-        chair_type = user_input[i]["type"]
-        zone = user_input[i]["zone"]
+        try:
+            zone = user_input[i]["zone"]
+        except:
+            return "'zone' missing."
 
         # add new values to database.
         cursor.execute("INSERT INTO fyp_db.chairs (status, x, y, type, zone, id, date) VALUES (%s, %s, %s, %s, %s, %s, TO_TIMESTAMP(%s,'YYYY-MM-DD HH24:MI:SS'))", [status, x, y, chair_type, zone, chair_id, date])
