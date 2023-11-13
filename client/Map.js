@@ -150,7 +150,7 @@ const Map = () => {
     fetchAPI();
     fetchTables();
 
-    const interval = setInterval(fetchAPI, 1000);
+    const interval = setInterval(fetchAPI, 10000);
 
     return () => clearInterval(interval);
   }, []);
