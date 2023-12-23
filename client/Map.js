@@ -5,6 +5,8 @@ import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import { useSharedValue, useAnimatedStyle, withSpring } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
 
+import {base_url} from "./constants"
+
 import axios from "axios"
 
 import Chair from "./Chair";
@@ -12,7 +14,7 @@ import Table from "./Table";
 
 const getChairs = () => {
   return new Promise((resolve, reject) =>{
-    axios.get("https://fyp-app.onrender.com/get_chairs")
+    axios.get(base_url + "/get_chairs")
     .catch(function(error) {
       console.log(error.response);
 
@@ -37,7 +39,7 @@ const getChairs = () => {
 
 const getTables = () => {
   return new Promise((resolve, reject) =>{
-    axios.get("https://fyp-app.onrender.com/get_tables")
+    axios.get(base_url + "/get_tables")
     .catch(function(error) {
       console.log(error.response);
 
