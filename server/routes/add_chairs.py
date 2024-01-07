@@ -17,6 +17,7 @@ def add_chairs():
     cursor = conn.cursor()
     user_input = request.json
     logging.info("Trying to add {} to database.".format(user_input))
+    
 
     # insert chair into database for each chair passed by user.
     for i in range(len(user_input)):
@@ -24,10 +25,15 @@ def add_chairs():
         date = user_input[i]["time"]
         cursor.execute("SELECT * FROM fyp_db.chairs WHERE id = %s", [chair_id])
         found_chairs = cursor.fetchall()
+        old_status = ""
 
         if (len(found_chairs) > 0):
             # delete old position in db of the current chair if the newest addition is newer.
             # since we always delete the old entry, there will always be 1 row returned in this case.
+
+            # also store the old status to persist the status in the case that we are persisting due to a lack of detection.
+            old_status = found_chairs[0][0]
+
             if(found_chairs[0][6] < datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S")):
                 cursor.execute("DELETE FROM fyp_db.chairs WHERE id = %s", [chair_id])
             else:
@@ -60,8 +66,13 @@ def add_chairs():
         except:
             return "'zone' missing."
 
-        # add new values to database.
-        cursor.execute("INSERT INTO fyp_db.chairs (status, x, y, type, zone, id, date) VALUES (%s, %s, %s, %s, %s, %s, TO_TIMESTAMP(%s,'YYYY-MM-DD HH24:MI:SS'))", [status, x, y, chair_type, zone, chair_id, date])
+        if status != "None":
+
+            # add new values to database.
+            cursor.execute("INSERT INTO fyp_db.chairs (status, x, y, type, zone, id, date) VALUES (%s, %s, %s, %s, %s, %s, TO_TIMESTAMP(%s,'YYYY-MM-DD HH24:MI:SS'))", [status, x, y, chair_type, zone, chair_id, date])
+        else:
+            cursor.execute("INSERT INTO fyp_db.chairs (status, x, y, type, zone, id, date) VALUES (%s, %s, %s, %s, %s, %s, TO_TIMESTAMP(%s,'YYYY-MM-DD HH24:MI:SS'))", [old_status, x, y, chair_type, zone, chair_id, date])
+
     cursor.close()
 
     message = "Successfully added chairs to the database."
