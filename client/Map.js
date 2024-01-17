@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
 });
 
 const Map = () => {
-  const width = 760;
-  const height = 540;
+  const width = 1920;
+  const height = 1080;
 
   const offset = useSharedValue({ x: -(width/2), y: -(height/2)});
   const rotation = useSharedValue(0);
