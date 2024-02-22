@@ -8,7 +8,7 @@ const App = () => {
         <GestureHandlerRootView style={{flex:1}}>
             <Map/>
         </GestureHandlerRootView>
-    )
+    );
 }
 
-export default App
+export default App;

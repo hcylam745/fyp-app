@@ -3,10 +3,10 @@ import {StyleSheet, View, Text, Alert, Skia} from "react-native";
 import {Circle, Paint, vec, Group} from "@shopify/react-native-skia";
 
 const Chair = ({x, y, occupancy}) => {
-  const width = 96;
-  const height = 96;
+  const width = 5;
+  const height = 5;
 
-  const strokeWidth = 5;
+  const strokeWidth = 1;
   const c = vec(width/2, height/2);
   const r = (width-strokeWidth) / 2;
 

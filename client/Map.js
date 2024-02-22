@@ -1,11 +1,13 @@
 import React, {useRef, useEffect, useState, useReducer} from "react";
-import {StyleSheet, View, Text, Alert, Skia} from "react-native";
+import {StyleSheet, View, Text, Alert, Skia, ImageBackground} from "react-native";
 import {Canvas, Group, useImage, useValue, Image, center} from "@shopify/react-native-skia";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import { useSharedValue, useAnimatedStyle, withSpring } from "react-native-reanimated";
 import Animated from "react-native-reanimated";
 
 import {base_url} from "./constants"
+
+import FloorPlan from "./FloorPlan";
 
 import axios from "axios"
 
@@ -78,8 +80,8 @@ const styles = StyleSheet.create({
 });
 
 const Map = () => {
-  const width = 1920;
-  const height = 1080;
+  const width = 1600;
+  const height = 850;
 
   const offset = useSharedValue({ x: -(width/2), y: -(height/2)});
   const rotation = useSharedValue(0);
@@ -156,13 +158,15 @@ const Map = () => {
 
     return () => clearInterval(interval);
   }, []);
+
   return (
     <GestureDetector gesture={Gesture.Simultaneous(pinch, pan, rotate)}>
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
           <Animated.View style={[styles.background, animatedStyles]}>
-            <Canvas style={{width, height}}>
-              {tablesList}
-              {chairsList}
+            <FloorPlan/>
+            <Canvas style={{width, height, position:'absolute', top: 0}}>
+                {tablesList}
+                {chairsList}
             </Canvas>
           </Animated.View>
       </View>
