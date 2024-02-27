@@ -7,7 +7,7 @@ import Animated from "react-native-reanimated";
 
 import {base_url} from "./constants"
 
-import FloorPlan from "./FloorPlan";
+import LG1 from "./floorplans/LG1";
 
 import axios from "axios"
 
@@ -163,7 +163,7 @@ const Map = () => {
     <GestureDetector gesture={Gesture.Simultaneous(pinch, pan, rotate)}>
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
           <Animated.View style={[styles.background, animatedStyles]}>
-            <FloorPlan/>
+            <LG1/>
             <Canvas style={{width, height, position:'absolute', top: 0}}>
                 {tablesList}
                 {chairsList}
