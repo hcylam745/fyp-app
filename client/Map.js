@@ -25,7 +25,7 @@ const getChairs = (floor) => {
     .then((res)=>{
       let out_arr = res.data;
       let result = [];
-      for (let i = 0; i < res.data.length; i++) {
+      for (let i = 0; i < out_arr.length; i++) {
         let x_val = out_arr[i][1];
         let y_val = out_arr[i][2];
         let zone = out_arr[i][4];
