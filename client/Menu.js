@@ -55,27 +55,27 @@ const getChairCount = () => {
                 "1": {
                     "occupied":0,
                     "free":0,
-                    "bag":0
+                    "belonging":0
                 },
                 "0": {
                     "occupied":0,
                     "free":0,
-                    "bag":0
+                    "belonging":0
                 },
                 "-1": {
                     "occupied":0,
                     "free":0,
-                    "bag":0
+                    "belonging":0
                 },
                 "-3": {
                     "occupied":0,
                     "free":0,
-                    "bag":0
+                    "belonging":0
                 },
                 "-4": {
                     "occupied":0,
                     "free":0,
-                    "bag":0
+                    "belonging":0
                 }
             };
 
@@ -104,8 +104,8 @@ const Menu = (props) => {
                 let current_floor_arr = {};
 
                 let tmp = [];
-                tmp.push(React.createElement(Text,{style:[styles.subtitle], key:1}, "Bag: "));
-                tmp.push(React.createElement(Text,{style:[styles.number], key:2}, value["bag"]));
+                tmp.push(React.createElement(Text,{style:[styles.subtitle], key:1}, "Belongings: "));
+                tmp.push(React.createElement(Text,{style:[styles.number], key:2}, value["belonging"]));
                 current_floor_arr["1"] = tmp;
 
                 tmp = [];
