@@ -13,7 +13,7 @@ const Chair = ({x, y, occupancy, id}) => {
   let center_colour = "green";
   if (occupancy == "occupied") {
     center_colour = "red";
-  } else if (occupancy == "bag") {
+  } else if (occupancy == "belonging") {
     center_colour = "yellow";
   }
 
