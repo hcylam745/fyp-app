@@ -16,3 +16,12 @@ After creating the configs.py file, create a virtual environment and enter it (o
 ```
 pip install -r requirements.txt
 ```
+
+
+<br/>
+
+The flask server in the server folder does not actually need to be run on your device, if you are testing running the code - it is hosted online. The mobile application already has a link to the existing online hosted API.
+
+<br/>
+
+The client folder contains a react-native mobile application that requests information from the hosted API, and displays information from the hosted API on a floor plan to show the positions and occupancies of free seats in the library.
