@@ -7,7 +7,7 @@ const Table = ({x, y, type, x_size, y_size}) => {
 
   // this forcefully pushes the table to the coordinates of the first recording's cctv output.
   // there should probably be a dict for each offset.
-  let x_translate = x+1007.5;
+  let x_translate = x+1007;
   let y_translate = y+653;
 
   let result = null;
