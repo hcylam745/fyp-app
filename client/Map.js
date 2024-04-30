@@ -91,11 +91,11 @@ const Map = (props) => {
   const width = 1600;
   const height = 850;
 
-  const offset = useSharedValue({ x: -(width/2), y: -(height/2)});
+  const offset = useSharedValue({ x: -(width/2)-550, y: -(height/2)-300});
   const rotation = useSharedValue(0);
   const savedRotation = useSharedValue(0);
-  const scale = useSharedValue(1);
-  const savedScale = useSharedValue(1);
+  const scale = useSharedValue(4);
+  const savedScale = useSharedValue(4);
   const animatedStyles = useAnimatedStyle(() => {
     return {
       transform: [
@@ -164,7 +164,7 @@ const Map = (props) => {
     fetchAPI();
     fetchTables();
 
-    const interval = setInterval(fetchAPI, 10000);
+    const interval = setInterval(fetchAPI, 1000);
 
     return () => clearInterval(interval);
   }, []);
